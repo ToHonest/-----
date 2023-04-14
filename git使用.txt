@@ -54,7 +54,21 @@ git remote add <远程库名> <url> 关联远程仓库
 git remote remove <远程库名> 删除远程库
 git push -u <远程库名 <分支名> 向远程库推送代码，并和当前分支关联(一次即可，后续可直接push)
 git clone <url> ："别名"  从远程库下载代码，冲突时可指定别名
-git push  如果本地库版本低于远程库，push默认是推不上去的
+git push orgin mymaster:yourmaster 如果本地库版本低于远程库，push默认是推不上去的( 将我的mymaster推送给服务器的yourmaster分支)
 git fetch  需要确保远程库和本地库一致才能推送成功,fetch会从远程库下载所有代码，但是不会自动和当前分支合并，所以需要手动merge
 git pull  从服务器上拉取代码并自动合并 (fetch的升级版)
 
+
+tag标签
+		当出现分离头指针时（HEAD detached），该状态下操作代码不会出现任何的效果，此时需要在当前节点先创建分支然后再操作
+git switch -c <分支名> <commit id>
+		查询id太过复杂就可以通过标签快速的识别出不同的开发节点
+		git tag
+		git tag <标签名>
+		git tag <标签名 提交id
+		git push <远程仓库> 标签名
+		git push 远程仓库 --tags  将所有的标签添加到远程库
+		git tag -d  标签名  删除本地标签
+		git push 远程仓库 --delete 标签名 删除远程标签
+
+gitignore  通过在项目中添加该文件，可以将一些不希望被git监视的文件不被提交，文件类直接写不希望添加的文件名即可
