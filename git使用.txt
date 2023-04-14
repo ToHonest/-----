@@ -1,0 +1,43 @@
+配置name,email属性
+git config --global user.name "名字"
+git config --global user.email "email"
+
+
+git init   -初始化仓库，该文件夹是否被git管理
+git status  -查看当前文件夹状态
+
+
+未跟踪：刚添加的文件夹
+暂存:仓库中的文件和本地文件内容不一样
+未修改:仓库和本地文件夹内容一样
+修改：将未修改的文件夹再次更改即可变为修改状态
+
+
+git add<filename> =>未跟踪变为暂存状态
+		---->git add * 将所有已修改或者未跟踪的文件变为暂存状态
+
+git commit -m "xxx"  将暂存的文件夹存储到仓库中
+git commit -a -m "xxx"  提交所有已经修改的文件（除未跟踪的文件）
+
+
+
+git restore  重置文件（将文件变为最后一个commit状态）
+git restore --staged<filename>将文件从删除状态变为暂存状态
+
+git rm<filename> 删除文件，删除后文件会变成一个暂存删除状态，提交后即可仓库和本地都消失
+git rm<filename> -f 强制删除文件, 修改状态下无法普通删除
+
+git 在存储文件时，每一次代码提交都会创建一个节点，节点会构成一个树状结构，树状结构即存在分支，默认情况下仓库只有一个分支命名为master，可以创建多个分支，分支与分支之间互不干扰
+git branch 查看当前分支
+git branch <branch name> 创建新的分支
+git branch -d <branch name> 删除分支
+git switch <branch name>切换分支
+git switch -c <branch name> 创建并切换分支
+git merger<branch name > 合并分支
+
+变基（rebase）
+发起变基时会找到两个分支最近的祖先，对比祖先的历史提交，并将它们提取存储到一个临时文件中，将该分支基底指向目标基地，再执行快速合并，会使代码变得清晰明了
+
+
+
+
