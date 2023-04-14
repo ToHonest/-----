@@ -38,6 +38,23 @@ git merger<branch name > 合并分支
 变基（rebase）
 发起变基时会找到两个分支最近的祖先，对比祖先的历史提交，并将它们提取存储到一个临时文件中，将该分支基底指向目标基地，再执行快速合并，会使代码变得清晰明了
 
+GitHub使用
+git remote add origin(远方仓库名字) url(远方仓库地址)
+git branch -M main   修改分支的名字为main
+git push -u origin main  将代码上传到服务器上
 
 
+码云使用方法
+git remote gitee url
+git push -u gitee main
+
+
+git remote 列出当前关联的远程库
+git remote add <远程库名> <url> 关联远程仓库
+git remote remove <远程库名> 删除远程库
+git push -u <远程库名 <分支名> 向远程库推送代码，并和当前分支关联(一次即可，后续可直接push)
+git clone <url> ："别名"  从远程库下载代码，冲突时可指定别名
+git push  如果本地库版本低于远程库，push默认是推不上去的
+git fetch  需要确保远程库和本地库一致才能推送成功,fetch会从远程库下载所有代码，但是不会自动和当前分支合并，所以需要手动merge
+git pull  从服务器上拉取代码并自动合并 (fetch的升级版)
 
