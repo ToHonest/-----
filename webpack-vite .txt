@@ -1,0 +1,89 @@
+Webpack的使用方法
+    1:初始化项目 yarn init -y
+    2.安装项目依赖 webpack 、webpack-cli（wp命令行工具）,开发依赖
+    3.在项目中创建src目录(源码文件夹)，编写代码默认写在index.js中，webpack会默认该文件为入口文件
+    4.执行yarn webpack来对代码进行打包,打包后会生成一个dist目录
+
+
+·配置文件(webpack.config.js)    在文件中添加该文件，即可对webpack进行配置,遵循的common.js编写规范
+    const path=require("path")
+    module.exports={
+        mode:"production" //打包的模型，项目模型
+        entry:"./src/index.js //文件的主入口,可以自定义设计
+                entry:[]    //指定多个入口
+                entry:{}     //指定对应的名称为hellp  hello:"./src/.."
+        output:{
+            path:paht.resolve(__dirname,"dist") //指定打包目录,默认为dist
+            filename："[name]-[id]-[hash].js" //打包后的文件名
+            clean:true //自动清理打包目录
+        
+        module:     //webpack默认只会处理js文件，需要处理其它类型的文件需要给它传入相应的loader(开发依赖),也就是module属性,需要安装开发依赖
+                {   rules(规则):[
+                    {test:/\.css$(正则表达式，以css结尾的文件)/,
+                    use:[style-loader,css-loader]//前者负责使用cs样式，后者负责转化css样式,顺序为倒叙执行,index.js中需要引入
+                             //yarn -D css-loader style-loader
+                    },
+                    {
+            //提高兼容性的方法，通过安装babel的loader来将一些新版本的语法转化为支持一些老版本的语法,
+            需要下载-D babel-loader(webpack和babel的连接) @babel/core(babel的核心功能) @babel/preset-env(babel的预设环境,一些常用的插件)
+                        test:/\.m?js$/,
+                        exclude:/(node.modules)|(bower_componets)/ , //除了该类型中的文件
+                        use:{
+                            loader:"babel-loader",
+                            options:{
+                                presets:"@babel/preset-env"//预设，一些常见的
+                            }
+                        }
+                    }
+
+                ]
+                //可以在配置(package.json)文件中指定设置浏览器兼容列表
+            "browserslist":[
+                        "defaults",
+                         "ie 6-8"
+                            ]
+
+
+        }
+        }
+        插件(plugin):提供webpack的扩展功能
+                下载 yarn add -D html-webpack-plugin
+                在webconfig中引入，然后在module中直接暴露出plugins属性即可,需要创建一个新的对象，对象中可以添加配置
+                    plugins: [
+                    new htmlPlugins({title:"配置对象"})
+                            ]
+        webpack --watch //自动监视我们的webpack文件，当有变化时会自动build
+        webpack serve  --open  在服务器中运行并打开，需要安装一个webpack serve
+                            yarn add -D webpack-dev-server
+
+        devtool:"inline-source-map" 项目复杂时直接调试打包后的代码困难，需要通过该配置工具来达到一个源码到打包后的代码的一个映射
+        即可以方便的调试源代码了
+           
+    
+    }   
+
+    Vite使用方法
+        速度更快，使用更加方便,需要安装开发依赖 yarn add Vite   依据的是ES模块化标准，所以在开发模式下不用每次打包，可以直接在静态网页中
+        显示，而webpack支持的是commonjs规范则必须经过转换才能运行,所以引入js文件时，必须在vite目录下的文件中加入type=module,vite会自动给
+        我们开启一个服务器用于调配未打包之前的代码，同时通过vite prevew 也会开启另外一个服务器用于调试打包之后的代码
+
+        vite的源码目录就是项目根目录,可以自己创建文件夹达到分组管理的效果
+        开发命令 vite 启动开发服务器  
+                vite build 打包代码
+                vite preview 预览打包后代码
+        使用命令构建项目
+                npm create vite@latest
+                yarn create vite
+                pnpm create vite
+        配置文件名:vite.config.js
+            import{defineConfig} from "vite" //引入defineConfig模块,后面输入配置时会有提示
+            import legacy from "@vitejs/plugin-legacy"//导入插件(处理浏览器兼容问题)
+            export default defineConfig({           相当于defineConfig是对后面括号中的内容再次封装
+                plugins:[
+                    legacy({
+                        targets:["defaults","ie 11"] //表示要兼容ie11的版本
+                    })
+
+                ]
+                
+            })
