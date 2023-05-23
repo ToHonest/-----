@@ -8,9 +8,9 @@ git status  -查看当前文件夹状态
 
 
 未跟踪：刚添加的文件夹(U)
-暂存:仓库中的文件和本地文件内容不一样(M)
-未修改:仓库和本地文件夹内容一样()
-修改：将未修改的文件夹再次更改即可变为修改状态(M)
+暂存:仓库中的文件和本地文件内容不一样
+未修改:仓库和本地文件夹内容一样
+修改：将未修改的文件夹再次更改即可变为修改状态
 
 
 git add<filename> =>未跟踪变为暂存状态
@@ -33,7 +33,7 @@ git branch <branch name> 创建新的分支
 git branch -d <branch name> 删除分支
 git switch <branch name>切换分支
 git switch -c <branch name> 创建并切换分支
-git merger<branch name > 合并分支
+git merger <branch name > 合并分支，将当前分支和目标分支进行合并
 
 变基（rebase）
 发起变基时会找到两个分支最近的祖先，对比祖先的历史提交，并将它们提取存储到一个临时文件中，将该分支基底指向目标基地，再执行快速合并，会使代码变得清晰明了
@@ -45,8 +45,8 @@ git push -u origin main  将代码上传到服务器上
 
 
 码云使用方法
-git remote gitee url
-git push -u gitee main
+git remote gitee url    连接远程库
+git push -u gitee main   将本地分支的代码上传到gitee仓库上
 
 
 git remote 列出当前关联的远程库
@@ -72,3 +72,11 @@ git switch -c <分支名> <commit id>
 		git push 远程仓库 --delete 标签名 删除远程标签
 
 gitignore  通过在项目中添加该文件，可以将一些不希望被git监视的文件不被提交，文件类直接写不希望添加的文件名即可
+
+gitlab
+作用：快速，自动部署网站
+1.购买服务器   2.在服务器上安装gitlab-ce   3.在服务器上安装gitlab-runner  4.将本地项目推送到gitlab,出发自动部署
+先fork到自己的仓库，然后通过git remote连接到自己的gitlab仓库，最后提交到自己的仓库，再发起合并请求
+CI:Continuous  Integration  持续化集成
+CD:Continuous Deployment   持续化部署
+安装gitLab Runner  setting->CI\CD->install gitlabRunner
